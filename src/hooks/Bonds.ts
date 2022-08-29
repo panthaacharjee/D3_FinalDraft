@@ -1,0 +1,55 @@
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import allBonds from "../helpers/AllBonds";
+import { IUserBondDetails } from "../slices/AccountSlice";
+import { Bond } from "../lib/Bond";
+import { IBondDetails } from "../slices/BondSlice";
+
+interface IBondingStateView {
+  account: {
+    bonds: {
+      [key: string]: IUserBondDetails;
+    };
+  };
+  bonding: {
+    loading: Boolean;
+    [key: string]: any;
+  };
+}
+
+// Smash all the interfaces together to get the BondData Type
+export interface IAllBondData extends Bond, IBondDetails, IUserBondDetails {}
+
+const initialBondArray = allBonds;
+// Slaps together bond data within the account & bonding states
+function useBonds(networkId: number) {
+  const bondLoading = useSelector((state: IBondingStateView) => !state.bonding.loading);
+  const bondState = useSelector((state: IBondingStateView) => state.bonding);
+  const accountBondsState = useSelector((state: IBondingStateView) => state.account.bonds);
+  const [bonds, setBonds] = useState<Bond[] | IAllBondData[]>(initialBondArray);
+
+  useEffect(() => {
+    let bondDetails: IAllBondData[];
+    bondDetails = allBonds
+      .flatMap(bond => {
+        if (bondState[bond.name] && bondState[bond.name].bondDiscount) {
+          return Object.assign(bond, bondState[bond.name]); // Keeps the object type
+        }
+        return bond;
+      })
+      .flatMap(bond => {
+        if (accountBondsState[bond.name]) {
+          return Object.assign(bond, accountBondsState[bond.name]);
+        }
+        return bond;
+      });
+
+    setBonds(bondDetails);
+  }, [bondState, accountBondsState, bondLoading]);
+
+  // Debug Log:
+  // console.log(bonds);
+  return { bonds, loading: bondLoading };
+}
+
+export default useBonds;
