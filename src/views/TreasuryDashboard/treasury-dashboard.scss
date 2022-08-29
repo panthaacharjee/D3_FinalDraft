@@ -362,3 +362,109 @@
     }
   }
 }
+
+
+/* Style CSS */
+.mint_box{
+  position: fixed;
+  z-index: 111111111;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 18, 18, 0.8);
+  backdrop-filter: blur(20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}     
+.mint_box_container{
+  position: fixed;
+  width: 30%;
+  background: #201f1f;;
+  border-radius: 15px;
+}
+.mint_btn{
+  width: 50%;
+  border:none;
+  border-bottom: 1px solid #feb626;
+  background: none;
+  padding: 10px 15px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+.borderBottom_none{
+  border-bottom:  1px solid #2e2e2e !important;
+}
+.mint_balance{
+  display:flex;
+  justify-content:space-around;
+  padding: 10px 0px;
+}
+.aprove_btn{
+  width: 80%;
+  border:none;
+  background: #feb626;
+  padding: 10px 15px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.redem_btn{
+  border:none;
+  background: #feb626;
+  padding: 10px 25px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+@media (max-width:1200px) {
+  .mint_box_container{
+    position: fixed;
+    width: 50%;
+    background: #201f1f;;
+    border-radius: 15px;
+  }
+}
+@media (max-width:750px) {
+  .mint_box_container{
+    position: fixed;
+    width: 60%;
+    background: #201f1f;;
+    border-radius: 15px;
+  }
+}
+@media (max-width:600px) {
+  .mint_box_container{
+    position: fixed;
+    width: 75%;
+    background: #201f1f;;
+    border-radius: 15px;
+  }
+}
+@media (max-width:490px) {
+  .mint_box_container{
+    position: fixed;
+    width: 90%;
+    background: #201f1f;;
+    border-radius: 15px;
+  }
+}

@@ -130,8 +130,10 @@ export function BondTableData({ bond }) {
         )}
       </TableCell>
       <TableCell>
-        <Link className="bond-name-link" component={NavLink} to={`/mints/${bond.name}`}>
-          <Button
+        {/* <Link className="bond-name-link" component={NavLink} to={`/mints/${bond.name}`}>
+          
+        </Link> */}
+        <Button
             className="bond-name-button"
             variant="outlined"
             color="primary"
@@ -145,7 +147,6 @@ export function BondTableData({ bond }) {
               Mint
             </Typography>
           </Button>
-        </Link>
       </TableCell>
     </TableRow>
   );

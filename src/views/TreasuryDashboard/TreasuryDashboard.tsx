@@ -1,7 +1,7 @@
 import { memo, useRef, useEffect, useState } from "react";
 import "./treasury-dashboard.scss";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Paper, Grid, Box, useMediaQuery, Typography } from "@material-ui/core";
+import { Paper, Grid, Box, useMediaQuery, Typography, } from "@material-ui/core";
 import { useAppSelector } from "../../hooks";
 import useBonds, { IAllBondData } from "../../hooks/Bonds";
 import { trim } from "../../helpers";
@@ -11,6 +11,7 @@ import { useWeb3Context } from "../../hooks/web3Context";
 import Bond from "../Bond/Bond";
 import ChooseBond from "../ChooseBond/ChooseBond";
 import Stake from "../Stake/Stake";
+import {BsXCircle} from 'react-icons/bs'
 
 
 //Image Import
@@ -18,6 +19,7 @@ import Img1 from '../../assets/NewImage/Frame 48095923.png'
 import Img2 from '../../assets/NewImage/Frame 48095919.png'
 import Img3 from '../../assets/NewImage/Frame 480959255.png'
 import Img4 from '../../assets/NewImage/Frame 48095913.png'
+
 
 
 const TreasuryDashboard = memo(() => {
@@ -135,10 +137,13 @@ const TreasuryDashboard = memo(() => {
   //     totalSupply,
 
 
-
+  /* New Code */
+  const [mint, setMint] = useState(true)
+  const [popup, setPopup] = useState(true)
 
   return (
-    <Box>
+    <>
+      <Box>
       <Grid
         container
         spacing={4}
@@ -157,7 +162,7 @@ const TreasuryDashboard = memo(() => {
           md={12}
           style={{ width: "100%", height: "auto" }}
         >
-          <Grid item sm={3}>
+          <Grid item sm={3} xs={12}>
             <Paper
               elevation={0}
               style={{
@@ -176,7 +181,7 @@ const TreasuryDashboard = memo(() => {
                 <Grid item sm={4}></Grid>
 
                 {/* Data */}
-                <Grid container direction="row" item sm={8}>
+                <Grid container direction="row" item sm={8} style={{alignItems:"center", justifyContent:"center"}}>
                   <Grid >
                     <img style={{marginRight:"15px"}} src={Img1}/>
                   </Grid>
@@ -184,7 +189,7 @@ const TreasuryDashboard = memo(() => {
                     <Grid
                       item
                       xs={12}
-                      style={{ display: "flex", alignItems: "flex-end" }}
+                      style={{ display: "flex", alignItems: "flex-start" }}
                     >
                       <Typography
                         style={{ marginBottom: "8px", color: "#929292" }}
@@ -206,13 +211,15 @@ const TreasuryDashboard = memo(() => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item sm={3}>
+          <Grid item sm={3} xs={12}>
             <Paper
               elevation={0}
               style={{
                 background: "#1C1C1C",
                 borderRadius: "12px",
                 height: "100%",
+                padding: "7% 0",
+
               }}
             >
               <Grid
@@ -224,7 +231,7 @@ const TreasuryDashboard = memo(() => {
                 <Grid item sm={4}></Grid>
 
                 {/* Data */}
-                <Grid container direction="row" item sm={8} style={{alignItems:"center"}}>
+                <Grid container direction="row" item sm={8} style={{alignItems:"center", justifyContent:"center"}}>
                   <Grid >
                     <img style={{marginRight:"15px"}} src={Img2}/>
                   </Grid>
@@ -254,13 +261,15 @@ const TreasuryDashboard = memo(() => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item sm={3}>
+          <Grid item sm={3} xs={12}>
             <Paper
               elevation={0}
               style={{
                 background: "#1C1C1C",
                 borderRadius: "12px",
                 height: "100%",
+                padding: "7% 0",
+
               }}
             >
               <Grid
@@ -272,7 +281,7 @@ const TreasuryDashboard = memo(() => {
                 <Grid item sm={4}></Grid>
 
                 {/* Data */}
-                <Grid container direction="row" item sm={8} style={{alignItems:"center"}}>
+                <Grid container direction="row" item sm={8} style={{alignItems:"center", justifyContent:"center"}}>
                   <Grid >
                     <img style={{marginRight:"15px"}} src={Img3}/>
                   </Grid>
@@ -302,13 +311,15 @@ const TreasuryDashboard = memo(() => {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item sm={3}>
+          <Grid item sm={3} xs={12}>
             <Paper
               elevation={0}
               style={{
                 background: "#1C1C1C",
                 borderRadius: "12px",
                 height: "100%",
+                padding: "7% 0",
+
               }}
             >
               <Grid
@@ -320,7 +331,7 @@ const TreasuryDashboard = memo(() => {
                 <Grid item sm={4}></Grid>
 
                 {/* Data */}
-                <Grid container direction="row" item sm={8} style={{alignItems:"center"}}>
+                <Grid container direction="row" item sm={8} style={{alignItems:"center", justifyContent:"center"}}>
                   <Grid >
                     <img style={{marginRight:"15px"}} src={Img4}/>
                   </Grid>
@@ -532,7 +543,7 @@ const TreasuryDashboard = memo(() => {
                     justifyContent: "center",
                   }}
                 >
-                  <ChooseBond />
+                  <ChooseBond  />
                 </Grid>
               </Grid>
             </Paper>
@@ -561,7 +572,93 @@ const TreasuryDashboard = memo(() => {
           </Grid>
         </Grid>
       </Grid>
+      
     </Box>
+      {
+        popup? 
+        <div className="mint_box">
+        <Box className="mint_box_container">
+             <Grid item  style={{display:"flex", justifyContent:"space-between", padding:"15px 15px", borderBottom:"1px solid #404040"}}>
+                <Typography variant="h6">Mint (Defi - USD)</Typography>
+                <Typography style={{fontSize:"18px", cursor:"pointer"}} onClick={()=>setPopup(!popup)}><BsXCircle/></Typography>
+             </Grid>
+             <Grid item style={{display:"flex", justifyContent:"space-around", padding:"45px"}} >
+                <Grid item style={{textAlign:"center"}}>
+                  <Typography style={{color: "#909090", fontSize:"14px", fontWeight:"400", fontFamily:"Outfit", lineHeight:"36px"}}>Mint Price</Typography>
+                  <Typography style={{ fontSize:"24px", fontWeight:"400", fontFamily:"Outfit", lineHeight:"36px"}}>$ 12.212</Typography>
+                </Grid>
+                <Grid item style={{textAlign:"center"}}>
+                <Typography style={{color: "#909090", fontSize:"14px", fontWeight:"400", fontFamily:"Outfit", lineHeight:"36px"}}>Market Price</Typography>
+                  <Typography style={{ fontSize:"24px", fontWeight:"400", fontFamily:"Outfit", lineHeight:"36px"}}>$ 6.212</Typography>
+                </Grid>
+             </Grid>
+             <Grid item style={{display:"flex", justifyContent:"space-around"}} >
+                <button onClick={()=>setMint(true)} className={mint==true? "mint_btn":"mint_btn borderBottom_none"}>Mint</button>
+                <button onClick={()=>setMint(false)} className={mint===false? "mint_btn ":"mint_btn borderBottom_none"}>Redeem</button>
+             </Grid>
+            {
+              mint ?  <Grid item style={{marginTop:"20px"}}>
+              <Grid item className="mint_balance">
+                <Typography>Your Balance</Typography>
+                <Typography>0.0 LP</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>You will Get</Typography>
+                <Typography>0 DEFI</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>Daily Emission Limit</Typography>
+                <Typography>128 Defi</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>You will Get</Typography>
+                <Typography>0 DEFI</Typography>
+              </Grid>
+              <Grid item style={{display:"flex", justifyContent:"center", padding:"10px 15px"}}>
+                <button className="aprove_btn">Approve</button>
+              </Grid>
+              <Typography style={{fontSize:"10px", fontWeight:"400", textAlign:"center", padding:"10px 20px"}}>First time minting DEFI-BUSD LP? Please approve D3 Protocol to use<br/> your DEFI-BUSD LP for minting.</Typography>
+
+            </Grid>
+           :
+              <Grid item style={{marginTop:"20px"}}>
+              <Grid item className="mint_balance">
+                <Typography>Pending Rewards</Typography>
+                <Typography>0 Defi</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>Claimable Rewards</Typography>
+                <Typography>0.0 Defi</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>Time until fully vested</Typography>
+                <Typography>128 Defi</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>ROI</Typography>
+                <Typography>-48.54 %</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>Debt Ratio</Typography>
+                <Typography>0%</Typography>
+              </Grid>
+              <Grid item className="mint_balance">
+                <Typography>Vesting term</Typography>
+                <Typography>5 days</Typography>
+              </Grid>
+              <Grid item style={{display:"flex", justifyContent:"center", padding:"10px 15px"}}>
+                <button className="redem_btn" style={{background:"none", border:"1px solid #feb626", color:"#feb626"}}>Claim</button>
+                <button className="redem_btn" >Claim and auto stake</button>
+              </Grid>
+
+          </Grid>
+            }
+             
+        </Box>
+      </div>:
+      ""
+      }
+    </>
   );
 });
 
